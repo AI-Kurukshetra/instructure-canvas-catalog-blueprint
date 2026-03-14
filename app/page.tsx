@@ -50,8 +50,8 @@ export default async function Home() {
             </svg>
           </span>
           <div className="leading-tight">
-            <p className="text-sm font-semibold tracking-wide text-white">Canvas Catalog</p>
-            <p className="text-xs text-white/60">Learner-first MVP</p>
+            <p className="text-sm font-semibold tracking-wide text-white">SkillDeck</p>
+            <p className="text-xs text-white/60">Professional learning</p>
           </div>
         </div>
 

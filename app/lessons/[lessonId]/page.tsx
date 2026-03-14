@@ -125,7 +125,7 @@ export default async function LessonPlayerPage({
       id: mockLesson.id,
       courseId: mockCourse.id,
       title: mockLesson.title,
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      videoUrl: "https://archive.org/download/OpenMedCourseM2EN/OpenMedCourse_Intro_EN.mp4",
       duration: mockLesson.durationMinutes * 60,
       order: mockLesson.order,
       isPreview: mockLesson.isPreview,
