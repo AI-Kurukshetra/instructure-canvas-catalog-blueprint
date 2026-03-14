@@ -56,6 +56,30 @@ export default async function Home() {
         </div>
 
         <div className="flex items-center gap-2">
+          <nav className="hidden items-center gap-2 md:flex">
+            <Link
+              href="/catalog"
+              className="rounded-full bg-white/5 px-4 py-2 text-sm text-white/80 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white"
+            >
+              Catalog
+            </Link>
+            {session ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="rounded-full bg-white/5 px-4 py-2 text-sm text-white/80 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href="/certificates"
+                  className="rounded-full bg-white/5 px-4 py-2 text-sm text-white/80 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white"
+                >
+                  Certificates
+                </Link>
+              </>
+            ) : null}
+          </nav>
           <span className="hidden rounded-full bg-white/5 px-3 py-1 text-xs text-white/70 ring-1 ring-white/10 sm:inline">
             {session ? "Signed in" : "Guest"}
           </span>

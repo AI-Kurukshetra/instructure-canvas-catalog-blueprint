@@ -36,7 +36,7 @@ export const signIn = async (_prevState: AuthActionState, formData: FormData) =>
     return { status: "error", message: error.message };
   }
 
-  redirect("/");
+  redirect("/dashboard");
 };
 
 export const signUp = async (_prevState: AuthActionState, formData: FormData) => {
@@ -53,7 +53,7 @@ export const signUp = async (_prevState: AuthActionState, formData: FormData) =>
     return { status: "error", message: error.message };
   }
 
-  redirect("/");
+  redirect("/dashboard");
 };
 
 export const signOut = async () => {

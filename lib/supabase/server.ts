@@ -14,13 +14,19 @@ export const createServerSupabaseClient = async () => {
         return cookieStore.get(name)?.value;
       },
       set(name: string, value: string, options: CookieOptions) {
-        if (typeof cookieStore.set === "function") {
+        if (typeof cookieStore.set !== "function") return;
+        try {
           cookieStore.set(name, value, options);
+        } catch {
+          // Ignore readonly cookie stores (e.g., Server Components).
         }
       },
       remove(name: string, options: CookieOptions) {
-        if (typeof cookieStore.set === "function") {
+        if (typeof cookieStore.set !== "function") return;
+        try {
           cookieStore.set(name, "", { ...options, maxAge: 0 });
+        } catch {
+          // Ignore readonly cookie stores (e.g., Server Components).
         }
       },
     },
