@@ -23,18 +23,33 @@ export default async function CatalogPage({
   const proto = h.get("x-forwarded-proto") ?? "http";
   const origin = host ? `${proto}://${host}` : "";
 
+  const safeJson = async <T extends { error?: string }>(res: Response): Promise<T> => {
+    if (!res.ok) {
+      return { error: `Request failed with status ${res.status}.` } as T;
+    }
+    const contentType = res.headers.get("content-type") ?? "";
+    if (!contentType.includes("application/json")) {
+      return { error: "Non-JSON response returned." } as T;
+    }
+    try {
+      return (await res.json()) as T;
+    } catch {
+      return { error: "Failed to parse JSON response." } as T;
+    }
+  };
+
   const categoryRes = await fetch(`${origin}/api/categories`, { cache: "no-store" });
-  const categoryJson = (await categoryRes.json()) as {
+  const categoryJson = await safeJson<{
     data?: { id: string; name: string; slug: string }[];
     error?: string;
-  };
+  }>(categoryRes);
   const categories = categoryJson.error ? [] : categoryJson.data ?? [];
 
   const courseParams = new URLSearchParams();
   if (q) courseParams.set("q", q);
   if (categorySlug) courseParams.set("category", categorySlug);
   const courseRes = await fetch(`${origin}/api/courses?${courseParams.toString()}`, { cache: "no-store" });
-  const courseJson = (await courseRes.json()) as {
+  const courseJson = await safeJson<{
     data?: {
       id: string;
       slug: string;
@@ -50,7 +65,7 @@ export default async function CatalogPage({
       categories?: { name: string; slug: string } | null;
     }[];
     error?: string;
-  };
+  }>(courseRes);
   const courses = courseJson.error ? [] : courseJson.data ?? [];
   const usingFallback = Boolean(courseJson.error);
 

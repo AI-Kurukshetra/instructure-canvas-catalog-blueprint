@@ -2,9 +2,10 @@ import { createServerClient } from "@supabase/ssr";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { env } from "@/lib/env";
+import { getEnv } from "@/lib/env";
 
 export async function GET(request: NextRequest) {
+  const env = getEnv();
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const nextParam = url.searchParams.get("next");
@@ -31,4 +32,3 @@ export async function GET(request: NextRequest) {
 
   return response;
 }
-
