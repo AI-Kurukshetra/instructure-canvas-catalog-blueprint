@@ -26,6 +26,17 @@ export type CourseRow = {
   rating_count: number;
 };
 
+type RawCourseRow = Omit<CourseRow, "categories"> & {
+  categories?: { name: string; slug: string }[] | { name: string; slug: string } | null;
+};
+
+const normalizeCourseRow = (row: RawCourseRow): CourseRow => ({
+  ...row,
+  categories: Array.isArray(row?.categories)
+    ? row.categories[0] ?? null
+    : row?.categories ?? null,
+});
+
 const isMissingRelationError = (message: string) =>
   message.includes('relation "public.courses" does not exist') ||
   message.includes('relation "public.categories" does not exist') ||
@@ -69,7 +80,7 @@ export const getPublishedCourses = async (opts?: { q?: string; category?: string
     throw new Error(error.message);
   }
 
-  return (data ?? []) as CourseRow[];
+  return (data ?? []).map(normalizeCourseRow);
 };
 
 export const getCourseById = async (id: string) => {
@@ -103,5 +114,5 @@ export const getCourseBySlug = async (slug: string) => {
     throw new Error(error.message);
   }
 
-  return (data ?? null) as CourseRow | null;
+  return data ? normalizeCourseRow(data) : null;
 };
