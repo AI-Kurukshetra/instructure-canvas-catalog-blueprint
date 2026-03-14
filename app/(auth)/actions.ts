@@ -23,34 +23,39 @@ const parseCredentials = (formData: FormData) =>
     password: formData.get("password"),
   });
 
-export const signIn = async (_prevState: AuthActionState, formData: FormData) => {
+export const signIn = async (
+  _prevState: void | AuthActionState,
+  formData: FormData,
+): Promise<void | AuthActionState> => {
   const parsed = parseCredentials(formData);
   if (!parsed.success) {
-    return { status: "error", message: parsed.error.issues[0]?.message };
+    return { status: "error", message: parsed.error.issues[0]?.message } satisfies AuthActionState;
   }
 
   const supabase = await createServerSupabaseClient();
   const { error } = await supabase.auth.signInWithPassword(parsed.data);
 
   if (error) {
-    return { status: "error", message: error.message };
+    return { status: "error", message: error.message } satisfies AuthActionState;
   }
 
   redirect("/dashboard");
 };
 
-export const signUp = async (_prevState: AuthActionState, formData: FormData) => {
+export const signUp = async (
+  _prevState: void | AuthActionState,
+  formData: FormData,
+): Promise<void | AuthActionState> => {
   const parsed = parseCredentials(formData);
   if (!parsed.success) {
-    return { status: "error", message: parsed.error.issues[0]?.message };
+    return { status: "error", message: parsed.error.issues[0]?.message } satisfies AuthActionState;
   }
 
   const supabase = await createServerSupabaseClient();
   const { error } = await supabase.auth.signUp(parsed.data);
-  
-  console.log("🚀 ~ signUp ~ supabase:", supabase)
+
   if (error) {
-    return { status: "error", message: error.message };
+    return { status: "error", message: error.message } satisfies AuthActionState;
   }
 
   redirect("/dashboard");

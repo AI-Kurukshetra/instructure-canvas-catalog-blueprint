@@ -15,7 +15,10 @@ type AuthFormProps = {
   alternateLabel: string;
   alternateLinkText: string;
   passwordAutoComplete?: string;
-  action: (state: AuthActionState, formData: FormData) => Promise<AuthActionState | void>;
+  action: (
+    state: void | AuthActionState,
+    formData: FormData,
+  ) => Promise<void | AuthActionState>;
 };
 
 const initialState: AuthActionState = { status: "idle" };

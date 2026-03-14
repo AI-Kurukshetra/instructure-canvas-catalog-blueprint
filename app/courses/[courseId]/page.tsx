@@ -19,7 +19,7 @@ export default async function CourseDetailPage({
 }) {
   const { courseId } = await params;
   const courseRow = await getCourseBySlug(courseId);
-  const fallback = fallbackFindCourse(params.courseId);
+  const fallback = fallbackFindCourse(courseId);
 
   const course = courseRow
     ? {
