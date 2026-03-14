@@ -158,10 +158,10 @@ export const seedCatalog = async () => {
   if (courseError) throw new Error(courseError.message);
 
   const VIDEO_URLS = [
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    "https://archive.org/download/OpenMedCourseM2EN/OpenMedCourse_Intro_EN.mp4",
+    "https://archive.org/download/OpenMedCourseM2EN/OpenMedCourse_M1_EN.mp4",
+    "https://archive.org/download/OpenMedCourseM2EN/OpenMedCourse_M2_EN.mp4",
+    "https://archive.org/download/OpenMedCourseM2EN/OpenMedCourse_M3_EN.mp4",
   ];
 
   const lessonTemplates: Record<string, { title: string; durationSeconds: number; isPreview: boolean }[]> = {
@@ -209,4 +209,3 @@ export const seedCatalog = async () => {
 
   redirect("/catalog");
 };
-

@@ -103,6 +103,30 @@ export default async function CatalogPage({
       }))
     : (usingFallback ? fallbackFiltered : []).map((c) => ({ ...c, slug: c.id }));
 
+  const cardGradients = [
+    "radial-gradient(640px 360px at 20% 20%, rgba(56,189,248,.22), transparent 60%), radial-gradient(640px 360px at 90% 80%, rgba(14,116,144,.18), transparent 60%), rgba(15,23,42,.75)",
+    "radial-gradient(640px 360px at 20% 20%, rgba(244,114,182,.20), transparent 60%), radial-gradient(640px 360px at 90% 80%, rgba(244,63,94,.18), transparent 60%), rgba(17,24,39,.78)",
+    "radial-gradient(640px 360px at 20% 20%, rgba(34,197,94,.20), transparent 60%), radial-gradient(640px 360px at 90% 80%, rgba(16,185,129,.18), transparent 60%), rgba(15,23,42,.78)",
+    "radial-gradient(640px 360px at 20% 20%, rgba(251,191,36,.20), transparent 60%), radial-gradient(640px 360px at 90% 80%, rgba(245,158,11,.16), transparent 60%), rgba(24,24,27,.8)",
+    "radial-gradient(640px 360px at 20% 20%, rgba(168,85,247,.20), transparent 60%), radial-gradient(640px 360px at 90% 80%, rgba(99,102,241,.18), transparent 60%), rgba(15,23,42,.78)",
+  ];
+
+  const categoryGradients: Record<string, string> = {
+    tech: cardGradients[0],
+    "tech skills": cardGradients[0],
+    "tech-skills": cardGradients[0],
+    finance: cardGradients[3],
+    healthcare: cardGradients[2],
+    health: cardGradients[2],
+    leadership: cardGradients[4],
+    compliance: cardGradients[1],
+  };
+
+  const resolveCardGradient = (category: string, index: number) => {
+    const key = category.trim().toLowerCase();
+    return categoryGradients[key] ?? cardGradients[index % cardGradients.length];
+  };
+
   return (
     <AppShell
       title="Course catalog"
@@ -215,15 +239,20 @@ export default async function CatalogPage({
       </section>
 
       <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {effectiveCourses.map((course) => (
+        {effectiveCourses.map((course, index) => (
           <Link
             key={course.id}
             href={`/courses/${course.slug}`}
-            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-white/7 to-white/4 p-4 ring-1 ring-white/12 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:ring-white/20 hover:shadow-[0_24px_120px_rgba(56,189,248,.10)]"
+            className="group relative overflow-hidden rounded-2xl p-4 ring-1 ring-white/12 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:ring-white/20 hover:shadow-[0_24px_120px_rgba(56,189,248,.10)]"
           >
             <div
               aria-hidden="true"
-              className="absolute inset-0 opacity-80"
+              className="absolute inset-0 opacity-90"
+              style={{ background: resolveCardGradient(course.category, index) }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 opacity-70"
               style={{ background: course.thumbnailGradient }}
             />
             <div className="relative">

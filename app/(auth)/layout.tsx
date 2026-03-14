@@ -42,10 +42,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             </svg>
           </span>
           <span className="leading-tight">
-            <span className="block text-sm font-semibold tracking-wide text-white">
-              Canvas Catalog
-            </span>
-            <span className="block text-xs text-white/60">Learner MVP</span>
+            <span className="block text-sm font-semibold tracking-wide text-white">SkillDeck</span>
+            <span className="block text-xs text-white/60">Professional learning</span>
           </span>
         </Link>
 
@@ -60,27 +58,26 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <main className="relative mx-auto grid w-full max-w-6xl gap-10 px-6 pb-16 pt-6 lg:grid-cols-2 lg:items-center">
         <section className="lg:pr-6">
           <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-            Learn faster with a catalog that stays out of your way.
+            Build skills that actually matter.
           </h1>
           <p className="mt-4 max-w-xl text-pretty text-base text-white/70 sm:text-lg">
-            Sign in to enroll, track progress, and pick up where you left off. This starter
-            uses Supabase Auth and Next.js App Router.
+            SkillDeck transforms training into measurable progress, verified credentials, and
+            real professional growth.
           </p>
 
           <div className="mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
             <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
-              <p className="text-sm font-semibold">Secure sessions</p>
-              <p className="mt-1 text-sm text-white/70">HttpOnly cookies on the server.</p>
+              <p className="text-sm font-semibold">Learn for your role</p>
+              <p className="mt-1 text-sm text-white/70">Skill-based catalogs mapped to real jobs.</p>
             </div>
             <div className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
-              <p className="text-sm font-semibold">Simple flows</p>
-              <p className="mt-1 text-sm text-white/70">Email + password for the MVP.</p>
+              <p className="text-sm font-semibold">Proof of progress</p>
+              <p className="mt-1 text-sm text-white/70">Track learning and earn trusted certificates.</p>
             </div>
           </div>
 
           <p className="mt-8 text-xs text-white/55">
-            Tip: In Supabase, disable email confirmations for quicker local testing (Auth
-            settings).
+            Tip: Use Google sign-in to speed up access for new learners.
           </p>
         </section>
 
@@ -89,4 +86,3 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
-

@@ -221,10 +221,10 @@ export default async function CourseDetailPage({
           </div>
         ) : (
           <div className="mt-5 rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-            <p className="text-sm font-semibold text-white">Lessons not configured yet</p>
+            <p className="text-sm font-semibold text-white">Lessons are on the way</p>
             <p className="mt-2 text-sm text-white/70">
-              This MVP screen is wired for course listings. Lessons will come from the Lessons
-              module when the `lessons` table is integrated.
+              We’re finishing up lesson content for this course. Check back soon or explore the
+              catalog for other available classes.
             </p>
           </div>
         )}
